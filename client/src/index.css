@@ -1,1 +1,8 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap") */
 @import "tailwindcss";
+
+@theme {
+  --font-Roboto: "Roboto";
+  --font-Montserrat: "Montserrat";
+  --font-Play: "Press Start 2P";
+}
