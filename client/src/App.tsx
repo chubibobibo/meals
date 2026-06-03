@@ -4,7 +4,12 @@ import { MantineProvider } from "@mantine/core";
 import { routeTree } from "./routes/routes";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 
-const router = createRouter({ routeTree });
+import { NotFoundPageError } from "./utils";
+
+const router = createRouter({
+  routeTree,
+  defaultNotFoundComponent: NotFoundPageError,
+});
 
 function App() {
   return (

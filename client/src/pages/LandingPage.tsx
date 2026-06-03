@@ -11,8 +11,13 @@ function LandingPage() {
           className='w-screen h-screen opacity-30 absolute object-cover object-left'
         />
         {/* background image */}
+        <section className='h-20 relative flex justify-center items-center px-2 mx-2 border-2 rounded-2xl mb-45 translate-y-30'>
+          <h1 className='font-bold text-base font-Play text-gray-800 text-center '>
+            Who is creating the meal plan?
+          </h1>
+        </section>
         {/* avatar login links */}
-        <section className='relative flex justify-center items-center gap-10 h-screen'>
+        <section className='relative flex justify-center items-center gap-10'>
           <AvatarComponent
             avatarName={"Aru"}
             imgLink={"../src/assets/aru.png"}
@@ -25,8 +30,6 @@ function LandingPage() {
 
           {/* avatar login links */}
         </section>
-
-        {/* <img src='../src/assets/hero.png' alt='' /> */}
       </main>
     </>
   );
