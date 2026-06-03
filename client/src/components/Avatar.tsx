@@ -17,7 +17,7 @@ function AvatarComponent({ avatarName, imgLink }: AvatarComponentType) {
       <img
         src={imgLink}
         alt=''
-        className='w-25 h-25 object-cover object-top rounded-full border-6 hover:scale-115 active:opacity-80'
+        className='w-25 h-25 object-cover object-top rounded-full border-6 hover:scale-115 active:scale-115 active:mix-blend-hard-light'
       />
       <h1 className='font-semibold text-lg'>{avatarName}</h1>
     </section>
