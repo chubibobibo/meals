@@ -5,6 +5,8 @@ interface AvatarComponentType {
 
 function AvatarComponent({ avatarName, imgLink }: AvatarComponentType) {
   /** @handleClick onClick handler to save data in browser and navigate to dashboard page */
+  /** @img scales and lightens when active */
+
   const handleClick = () => {
     console.log("hello");
   };
