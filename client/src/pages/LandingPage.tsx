@@ -1,9 +1,19 @@
 import AvatarComponent from "../components/Avatar";
+import { useState } from "react";
 
 function LandingPage() {
+  const [userData, setUserData] = useState({ username: "" });
+
+  // const handleClick = () => {
+  //   // console.log(currentUsername);
+  // };
+  localStorage.setItem("username", userData.username);
+  const currentUsername = localStorage.getItem("username");
+  console.log(currentUsername);
   return (
     <>
       <main className='w-screen h-screen'>
+        {/* <button onClick={handleClick}>click</button> */}
         {/* background image */}
         <img
           src='../src/assets/mealappbg.png'
@@ -21,15 +31,20 @@ function LandingPage() {
           <AvatarComponent
             avatarName={"Aru"}
             imgLink={"../src/assets/aru.png"}
+            user={userData}
+            setUser={setUserData}
           />
 
           <AvatarComponent
             avatarName={"Lester"}
             imgLink={"../src/assets/lester.png"}
+            user={userData}
+            setUser={setUserData}
           />
 
           {/* avatar login links */}
         </section>
+        <p>Username: {userData.username}</p>
       </main>
     </>
   );
