@@ -5,7 +5,7 @@ import type { SetStateAction, Dispatch } from "react";
 interface AvatarComponentType {
   avatarName: string;
   imgLink: string;
-  user: { username: string };
+  user: { username: string | null };
   setUser: Dispatch<SetStateAction<user>>;
 }
 function AvatarComponent({
@@ -22,16 +22,10 @@ function AvatarComponent({
       ...prev,
       username: avatarName,
     }));
-    // localStorage.setItem("username", user.username);
   };
-  // const handleClick = () => {
-  //   setUser({
-  //     username: avatarName,
-  //   });
-  //   localStorage.setItem("username", user.username);
-  // };
+  // localStorage.setItem("username", user.username);
 
-  // console.log(user);
+  console.log(localStorage.getItem("username"));
   return (
     <section className='flex flex-col items-center cursor-pointer'>
       <img

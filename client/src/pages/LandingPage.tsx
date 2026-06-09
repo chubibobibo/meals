@@ -2,14 +2,19 @@ import AvatarComponent from "../components/Avatar";
 import { useState } from "react";
 
 function LandingPage() {
-  const [userData, setUserData] = useState({ username: "" });
-
-  // const handleClick = () => {
-  //   // console.log(currentUsername);
-  // };
-  localStorage.setItem("username", userData.username);
+  // fetch localStorage content to be used as default for the userData state. This way we will have the userData state persist even after refreshes.
   const currentUsername = localStorage.getItem("username");
-  console.log(currentUsername);
+  const [userData, setUserData] = useState({
+    username: currentUsername || null,
+  });
+  localStorage.setItem(
+    "username",
+    userData.username ? userData.username : "No User Selected",
+  );
+  //stores state in local storage
+  // console.log(currentUsername);
+  console.log(userData);
+
   return (
     <>
       <main className='w-screen h-screen'>
@@ -44,7 +49,7 @@ function LandingPage() {
 
           {/* avatar login links */}
         </section>
-        <p>Username: {userData.username}</p>
+        <p>Username: {currentUsername}</p>
       </main>
     </>
   );
