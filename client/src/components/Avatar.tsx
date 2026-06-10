@@ -1,6 +1,7 @@
 /**@Note Rendered in LandingPage */
 
 import type { SetStateAction, Dispatch } from "react";
+import { useNavigate } from "@tanstack/react-router";
 
 interface AvatarComponentType {
   avatarName: string;
@@ -17,13 +18,15 @@ function AvatarComponent({
   /** @handleClick onClick handler to save data in browser and navigate to dashboard page */
   /** @img scales and lightens when active */
 
+  const navigate = useNavigate({ from: "/" });
+
   const handleClick = () => {
     setUser((prev: { username: string }) => ({
       ...prev,
       username: avatarName,
     }));
+    navigate({ to: "/dashboard/index" });
   };
-  // localStorage.setItem("username", user.username);
 
   console.log(localStorage.getItem("username"));
   return (
@@ -32,7 +35,7 @@ function AvatarComponent({
         onClick={handleClick}
         src={imgLink}
         alt=''
-        className='w-25 h-25 object-cover object-top rounded-full border-6 hover:scale-115 active:scale-115 active:mix-blend-hard-light'
+        className='w-22 h-22 object-cover object-top rounded-full border-3 hover:scale-115 active:scale-115 active:mix-blend-hard-light'
       />
       <h1 className='font-semibold text-lg'>{avatarName}</h1>
     </section>
