@@ -6,6 +6,9 @@ import { createRouter, RouterProvider } from "@tanstack/react-router";
 
 import { NotFoundPageError, ErrorPage } from "./utils";
 
+import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
+
 const router = createRouter({
   routeTree,
   defaultNotFoundComponent: NotFoundPageError,

@@ -14,9 +14,11 @@ function IndexPage() {
     <main className='p-2 pt-5 w-screen flex flex-col items-center'>
       <form method='POST' onSubmit={handleSubmit}>
         <MealPlanForm />
-        <Button variant='filled' type='submit'>
-          Button
-        </Button>
+        <section className='flex justify-center p-2'>
+          <Button variant='filled' type='submit' className=''>
+            Create the meal plan
+          </Button>
+        </section>
       </form>
     </main>
   );
