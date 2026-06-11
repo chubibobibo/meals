@@ -4,19 +4,17 @@ import { DateInput } from "@mantine/dates";
 import dayjs from "dayjs";
 import { useState } from "react";
 
+import MealInput from "./MealInput";
+
 function MealPlanForm() {
   // Obtain current date and convert to date that Mantine can parse
   const currentDate = new Date().getTime();
   const convertedDate = dayjs(currentDate).format("YYYY-MM-DD");
   // Obtain userData from localStorage
   const currentUser = localStorage.getItem("username");
-  //   const [value, setValue] = useState<[string | null, string | null]>([
-  //     convertedDate,
-  //     null,
-  //   ]);
+  // states to control calendar data
   const [value1, setValue1] = useState<string | null>(null);
   const [value2, setValue2] = useState<string | null>(null);
-  //   console.log(value1);
   return (
     <>
       <section className='border-2 rounded-sm p-1 mb-5'>
@@ -33,7 +31,7 @@ function MealPlanForm() {
           <p className='text-red-800 text-xs'>*</p>
           <p className='text-xs'>Required fields</p>
         </aside>
-        <aside className='bg-gray-200 p-1 rounded-t-sm flex justify-center'>
+        <aside className='bg-gray-200 p-1 rounded-t-sm flex justify-center gap-2'>
           <DateInput
             value={value1}
             onChange={setValue1}
@@ -49,96 +47,78 @@ function MealPlanForm() {
             label='Meal plan end date'
             placeholder='meal plan end date'
             name='endDate'
+            minDate={convertedDate}
             required
           />
         </aside>
 
-        <aside className='flex gap-2 bg-red-200 p-1'>
-          <TextInput
-            size='xs'
-            label='Monday Meal'
-            // description='Enter planned meal for Dinner'
-            placeholder="What's up for Dinner?"
-            name='mondayDinner'
-            required
-          />
-          <Textarea
-            size='xs'
-            label='Notes about meal'
-            // description='Any notes you want to share?'
-            placeholder='Is there anything else I should know?'
-            name='mondayDinnerNotes'
-          />
-        </aside>
-        <aside className='flex gap-2 bg-gray-200 p-1'>
-          <TextInput
-            size='xs'
-            label='Tuesday Meal'
-            // description='Enter planned meal for Dinner'
-            placeholder="What's up for Dinner?"
-            name='tuesdayDinner'
-            required
-          />
-          <Textarea
-            size='xs'
-            label='Notes about meal'
-            // description='Any notes you want to share?'
-            placeholder='Is there anything else I should know?'
-            name='tuesdayDinnerNotes'
-          />
-        </aside>
-        <aside className='flex gap-2 bg-red-200 p-1'>
-          <TextInput
-            size='xs'
-            label='Wednesday Meal'
-            // description='Enter planned meal for Dinner'
-            placeholder="What's up for Dinner?"
-            name='wednesdayDinner'
-            required
-          />
-          <Textarea
-            size='xs'
-            label='Notes about meal'
-            // description='Any notes you want to share?'
-            placeholder='Is there anything else I should know?'
-            name='wednesdayDinnerNotes'
-          />
-        </aside>
-        <aside className='flex gap-2 bg-gray-200 p-1'>
-          <TextInput
-            size='xs'
-            label='Thursday Meal'
-            // description='Enter planned meal for Dinner'
-            placeholder="What's up for Dinner?"
-            name='thursdayDinner'
-            required
-          />
-          <Textarea
-            size='xs'
-            label='Notes about meal'
-            // description='Any notes you want to share?'
-            name='thursdayDinnerNotes'
-            placeholder='Is there anything else I should know?'
-          />
-        </aside>
-        <aside className='flex gap-2 bg-red-200 p-1'>
-          <TextInput
-            size='xs'
-            label='Friday Meal'
-            // description='Enter planned meal for Dinner'
-            placeholder="What's up for Dinner?"
-            name='fridayDinner'
-            required
-          />
-          <Textarea
-            size='xs'
-            label='Notes about meal'
-            // description='Any notes you want to share?'
-            placeholder='Is there anything else I should know?'
-            name='fridayDinnerNotes'
-          />
-        </aside>
-        <aside className='flex gap-2 grid grid-cols-2 grid-cols-2 bg-gray-200 p-1'>
+        <MealInput
+          sizeProp='xs'
+          labelProp='Monday Meal'
+          placeholderProp="What's up for dinner"
+          nameProp='mondayDinner'
+          requiredProp={true}
+          TASizeProp='sm'
+          TALabelProp='Notes about meal'
+          TAPlaceholderProp='Is there anything else I should know?'
+          TANameProp='mondayDinnerNotes'
+          TARequiredProp={false}
+          bgColor='bg-blue-200'
+        />
+        <MealInput
+          sizeProp='xs'
+          labelProp='Tuesday Meal'
+          placeholderProp="What's up for dinner"
+          nameProp='tuesdayDinner'
+          requiredProp={true}
+          TASizeProp='sm'
+          TALabelProp='Notes about meal'
+          TAPlaceholderProp='Is there anything else I should know?'
+          TANameProp='tuesdayDinnerNotes'
+          TARequiredProp={false}
+          bgColor='bg-red-200'
+        />
+        <MealInput
+          sizeProp='xs'
+          labelProp='Wednesday Meal'
+          placeholderProp="What's up for dinner"
+          nameProp='wednesdayDinner'
+          requiredProp={true}
+          TASizeProp='sm'
+          TALabelProp='Notes about meal'
+          TAPlaceholderProp='Is there anything else I should know?'
+          TANameProp='wednesdayDinnerNotes'
+          TARequiredProp={false}
+          bgColor='bg-blue-200'
+        />
+        <MealInput
+          sizeProp='xs'
+          labelProp='Thursday Meal'
+          placeholderProp="What's up for dinner"
+          nameProp='thursdayDinner'
+          requiredProp={true}
+          TASizeProp='sm'
+          TALabelProp='Notes about meal'
+          TAPlaceholderProp='Is there anything else I should know?'
+          TANameProp='thursdayDinnerNotes'
+          TARequiredProp={false}
+          bgColor='bg-red-200'
+        />
+        <MealInput
+          sizeProp='xs'
+          labelProp='Friday Meal'
+          placeholderProp="What's up for dinner"
+          nameProp='fridayDinner'
+          requiredProp={true}
+          TASizeProp='sm'
+          TALabelProp='Notes about meal'
+          TAPlaceholderProp='Is there anything else I should know?'
+          TANameProp='fridayDinnerNotes'
+          TARequiredProp={false}
+          bgColor='bg-blue-200'
+        />
+
+        <aside className='flex gap-2 grid grid-cols-2 grid-cols-2 bg-red-200 p-1'>
           <TextInput
             size='xs'
             label='Saturday Meal (Lunch)'
@@ -170,7 +150,7 @@ function MealPlanForm() {
             name='saturdayDinnerNotes'
           />
         </aside>
-        <aside className='flex gap-2 grid grid-cols-2 grid-cols-2 bg-red-200 p-1 rounded-b-sm'>
+        <aside className='flex gap-2 grid grid-cols-2 grid-cols-2 bg-blue-200 p-1 rounded-b-sm'>
           <TextInput
             size='xs'
             label='Sunday Meal (Lunch)'
