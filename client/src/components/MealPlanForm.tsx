@@ -1,30 +1,63 @@
 // rendered in Indexpage.tsx
 import { TextInput, Textarea } from "@mantine/core";
-const currentUser = localStorage.getItem("username");
+import { DateInput } from "@mantine/dates";
+import dayjs from "dayjs";
+import { useState } from "react";
 
 function MealPlanForm() {
+  // Obtain current date and convert to date that Mantine can parse
+  const currentDate = new Date().getTime();
+  const convertedDate = dayjs(currentDate).format("YYYY-MM-DD");
+  // Obtain userData from localStorage
+  const currentUser = localStorage.getItem("username");
+  //   const [value, setValue] = useState<[string | null, string | null]>([
+  //     convertedDate,
+  //     null,
+  //   ]);
+  const [value1, setValue1] = useState<string | null>(null);
+  const [value2, setValue2] = useState<string | null>(null);
+  //   console.log(value1);
   return (
     <>
-      <section className='border-2 rounded-sm p-1'>
-        <h1 className='font-Montserrat text-2xl font-bold text-gray-700 text-center'>
+      <section className='border-2 rounded-sm p-1 mb-5'>
+        <h1 className='font-Montserrat text-xl font-bold text-gray-700 text-center'>
           {`Hi ${currentUser} 👋👋👋,`}
         </h1>
-        <h1 className='font-Montserrat text-2xl font-bold text-gray-700 text-center'>
+        <h1 className='font-Montserrat text-lg font-bold text-gray-700 text-center'>
           Create your menu for the week!
         </h1>
       </section>
       {/** Meal plan form */}
-      <section className='flex flex-col justify-center gap-2 border-2 mt-3 p-2 rounded-sm'>
+      <section className='flex flex-col justify-center border-2 mt-3 p-1 rounded-sm gap-1'>
         <aside className='flex gap-1'>
           <p className='text-red-800 text-xs'>*</p>
           <p className='text-xs'>Required fields</p>
         </aside>
+        <aside className='bg-gray-200 p-1 rounded-t-sm flex justify-center'>
+          <DateInput
+            value={value1}
+            onChange={setValue1}
+            label='Meal plan start date'
+            placeholder='meal plan start date'
+            name='startDate'
+            minDate={convertedDate}
+            required
+          />
+          <DateInput
+            value={value2}
+            onChange={setValue2}
+            label='Meal plan end date'
+            placeholder='meal plan end date'
+            name='endDate'
+            required
+          />
+        </aside>
 
-        <aside className='flex gap-2'>
+        <aside className='flex gap-2 bg-red-200 p-1'>
           <TextInput
             size='xs'
             label='Monday Meal'
-            description='Enter planned meal for Dinner'
+            // description='Enter planned meal for Dinner'
             placeholder="What's up for Dinner?"
             name='mondayDinner'
             required
@@ -32,16 +65,16 @@ function MealPlanForm() {
           <Textarea
             size='xs'
             label='Notes about meal'
-            description='Any notes you want to share?'
-            placeholder='Is there anything else should I know?'
+            // description='Any notes you want to share?'
+            placeholder='Is there anything else I should know?'
             name='mondayDinnerNotes'
           />
         </aside>
-        <aside className='flex gap-2'>
+        <aside className='flex gap-2 bg-gray-200 p-1'>
           <TextInput
             size='xs'
             label='Tuesday Meal'
-            description='Enter planned meal for Dinner'
+            // description='Enter planned meal for Dinner'
             placeholder="What's up for Dinner?"
             name='tuesdayDinner'
             required
@@ -49,16 +82,16 @@ function MealPlanForm() {
           <Textarea
             size='xs'
             label='Notes about meal'
-            description='Any notes you want to share?'
-            placeholder='Is there anything else should I know?'
+            // description='Any notes you want to share?'
+            placeholder='Is there anything else I should know?'
             name='tuesdayDinnerNotes'
           />
         </aside>
-        <aside className='flex gap-2'>
+        <aside className='flex gap-2 bg-red-200 p-1'>
           <TextInput
             size='xs'
             label='Wednesday Meal'
-            description='Enter planned meal for Dinner'
+            // description='Enter planned meal for Dinner'
             placeholder="What's up for Dinner?"
             name='wednesdayDinner'
             required
@@ -66,16 +99,16 @@ function MealPlanForm() {
           <Textarea
             size='xs'
             label='Notes about meal'
-            description='Any notes you want to share?'
-            placeholder='Is there anything else should I know?'
+            // description='Any notes you want to share?'
+            placeholder='Is there anything else I should know?'
             name='wednesdayDinnerNotes'
           />
         </aside>
-        <aside className='flex gap-2'>
+        <aside className='flex gap-2 bg-gray-200 p-1'>
           <TextInput
             size='xs'
             label='Thursday Meal'
-            description='Enter planned meal for Dinner'
+            // description='Enter planned meal for Dinner'
             placeholder="What's up for Dinner?"
             name='thursdayDinner'
             required
@@ -83,16 +116,16 @@ function MealPlanForm() {
           <Textarea
             size='xs'
             label='Notes about meal'
-            description='Any notes you want to share?'
+            // description='Any notes you want to share?'
             name='thursdayDinnerNotes'
-            placeholder='Is there anything else should I know?'
+            placeholder='Is there anything else I should know?'
           />
         </aside>
-        <aside className='flex gap-2'>
+        <aside className='flex gap-2 bg-red-200 p-1'>
           <TextInput
             size='xs'
             label='Friday Meal'
-            description='Enter planned meal for Dinner'
+            // description='Enter planned meal for Dinner'
             placeholder="What's up for Dinner?"
             name='fridayDinner'
             required
@@ -100,12 +133,12 @@ function MealPlanForm() {
           <Textarea
             size='xs'
             label='Notes about meal'
-            description='Any notes you want to share?'
-            placeholder='Is there anything else should I know?'
+            // description='Any notes you want to share?'
+            placeholder='Is there anything else I should know?'
             name='fridayDinnerNotes'
           />
         </aside>
-        <aside className='flex gap-2 grid grid-cols-2 grid-cols-2'>
+        <aside className='flex gap-2 grid grid-cols-2 grid-cols-2 bg-gray-200 p-1'>
           <TextInput
             size='xs'
             label='Saturday Meal (Lunch)'
@@ -117,14 +150,14 @@ function MealPlanForm() {
           <Textarea
             size='xs'
             label='Notes about meal'
-            description='Any notes you want to share?'
-            placeholder='Is there anything else should I know?'
+            // description='Any notes you want to share?'
+            placeholder='Is there anything else I should know?'
             name='saturdayLunchNotes'
           />
           <TextInput
             size='xs'
             label='Saturday Meal (Dinner)'
-            description='Enter planned meal for Dinner'
+            // description='Enter planned meal for Dinner'
             placeholder="What's up for Dinner?"
             name='saturdayDinner'
             required
@@ -132,12 +165,12 @@ function MealPlanForm() {
           <Textarea
             size='xs'
             label='Notes about meal'
-            description='Any notes you want to share?'
-            placeholder='Is there anything else should I know?'
+            // description='Any notes you want to share?'
+            placeholder='Is there anything else I should know?'
             name='saturdayDinnerNotes'
           />
         </aside>
-        <aside className='flex gap-2 grid grid-cols-2 grid-cols-2'>
+        <aside className='flex gap-2 grid grid-cols-2 grid-cols-2 bg-red-200 p-1 rounded-b-sm'>
           <TextInput
             size='xs'
             label='Sunday Meal (Lunch)'
@@ -149,14 +182,14 @@ function MealPlanForm() {
           <Textarea
             size='xs'
             label='Notes about meal'
-            description='Any notes you want to share?'
-            placeholder='Is there anything else should I know?'
+            // description='Any notes you want to share?'
+            placeholder='Is there anything else I should know?'
             name='sundayLunchNotes'
           />
           <TextInput
             size='xs'
             label='Sunday Meal (Dinner)'
-            description='Enter planned meal for Dinner'
+            // description='Enter planned meal for Dinner'
             placeholder="What's up for Dinner?"
             name='sundayDinner'
             required
@@ -164,8 +197,8 @@ function MealPlanForm() {
           <Textarea
             size='xs'
             label='Notes about meal'
-            description='Any notes you want to share?'
-            placeholder='Is there anything else should I know?'
+            // description='Any notes you want to share?'
+            placeholder='Is there anything else I should know?'
             name='sundayDinnerNotes'
           />
         </aside>
