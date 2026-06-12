@@ -60,7 +60,7 @@ function MealPlanForm() {
           requiredProp={true}
           TASizeProp='sm'
           TALabelProp='Notes about meal'
-          TAPlaceholderProp='Is there anything else I should know?'
+          TAPlaceholderProp='Anything you want to note about the meal?'
           TANameProp='mondayDinnerNotes'
           TARequiredProp={false}
           bgColor='bg-blue-200'
@@ -73,7 +73,7 @@ function MealPlanForm() {
           requiredProp={true}
           TASizeProp='sm'
           TALabelProp='Notes about meal'
-          TAPlaceholderProp='Is there anything else I should know?'
+          TAPlaceholderProp='Anything you want to note about the meal?'
           TANameProp='tuesdayDinnerNotes'
           TARequiredProp={false}
           bgColor='bg-red-200'
@@ -86,7 +86,7 @@ function MealPlanForm() {
           requiredProp={true}
           TASizeProp='sm'
           TALabelProp='Notes about meal'
-          TAPlaceholderProp='Is there anything else I should know?'
+          TAPlaceholderProp='Anything you want to note about the meal?'
           TANameProp='wednesdayDinnerNotes'
           TARequiredProp={false}
           bgColor='bg-blue-200'
@@ -99,7 +99,7 @@ function MealPlanForm() {
           requiredProp={true}
           TASizeProp='sm'
           TALabelProp='Notes about meal'
-          TAPlaceholderProp='Is there anything else I should know?'
+          TAPlaceholderProp='Anything you want to note about the meal?'
           TANameProp='thursdayDinnerNotes'
           TARequiredProp={false}
           bgColor='bg-red-200'
@@ -112,13 +112,13 @@ function MealPlanForm() {
           requiredProp={true}
           TASizeProp='sm'
           TALabelProp='Notes about meal'
-          TAPlaceholderProp='Is there anything else I should know?'
+          TAPlaceholderProp='Anything you want to note about the meal?'
           TANameProp='fridayDinnerNotes'
           TARequiredProp={false}
           bgColor='bg-blue-200'
         />
 
-        <aside className='flex gap-2 grid grid-cols-2 grid-cols-2 bg-red-200 p-1'>
+        <aside className='flex gap-2 grid grid-cols-1 grid-rows-2 bg-red-200 p-1'>
           <TextInput
             size='xs'
             label='Saturday Meal (Lunch)'
@@ -131,7 +131,7 @@ function MealPlanForm() {
             size='xs'
             label='Notes about meal'
             // description='Any notes you want to share?'
-            placeholder='Is there anything else I should know?'
+            placeholder='Anything you want to note about the meal?'
             name='saturdayLunchNotes'
           />
           <TextInput
@@ -146,11 +146,11 @@ function MealPlanForm() {
             size='xs'
             label='Notes about meal'
             // description='Any notes you want to share?'
-            placeholder='Is there anything else I should know?'
+            placeholder='Anything you want to note about the meal?'
             name='saturdayDinnerNotes'
           />
         </aside>
-        <aside className='flex gap-2 grid grid-cols-2 grid-cols-2 bg-blue-200 p-1 rounded-b-sm'>
+        <aside className='flex gap-2 grid grid-cols-1 grid-rows-2 bg-blue-200 p-1 rounded-b-sm'>
           <TextInput
             size='xs'
             label='Sunday Meal (Lunch)'
@@ -163,7 +163,7 @@ function MealPlanForm() {
             size='xs'
             label='Notes about meal'
             // description='Any notes you want to share?'
-            placeholder='Is there anything else I should know?'
+            placeholder='Anything you want to note about the meal?'
             name='sundayLunchNotes'
           />
           <TextInput
@@ -178,10 +178,15 @@ function MealPlanForm() {
             size='xs'
             label='Notes about meal'
             // description='Any notes you want to share?'
-            placeholder='Is there anything else I should know?'
+            placeholder='Anything you want to note about the meal?'
             name='sundayDinnerNotes'
           />
         </aside>
+        {/* <aside className='text-center my-4'>
+          <Button variant='filled' type='submit' className=''>
+            Create the meal plan
+          </Button>
+        </aside> */}
       </section>
     </>
   );

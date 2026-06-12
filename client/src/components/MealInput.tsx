@@ -28,7 +28,7 @@ function MealInput({
 }: MealInputType) {
   return (
     <>
-      <aside className={`flex gap-2 ${bgColor} p-1`}>
+      <aside className={`flex flex-col gap-2 ${bgColor} p-1`}>
         <TextInput
           size={sizeProp}
           label={labelProp}
