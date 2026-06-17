@@ -1,5 +1,6 @@
 import AvatarComponent from "../components/Avatar";
 import { useState } from "react";
+import Footer from "../components/Footer";
 
 function LandingPage() {
   // fetch localStorage content to be used as default for the userData state. This way we will have the userData state persist even after refreshes.
@@ -46,7 +47,9 @@ function LandingPage() {
 
           {/* avatar login links */}
         </section>
-        {/* <p>Username: {currentUsername}</p> */}
+        <section className='mt-10 fixed inset-x-0 bottom-0'>
+          <Footer />
+        </section>
       </main>
     </>
   );
