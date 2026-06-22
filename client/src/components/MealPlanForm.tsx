@@ -1,12 +1,15 @@
 // rendered in Indexpage.tsx
-import { TextInput, Textarea } from "@mantine/core";
+import { TextInput, Textarea, Button } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import dayjs from "dayjs";
 import { useState } from "react";
+import emailjs, { EmailJSResponseStatus } from "@emailjs/browser";
 
-import MealInput from "./MealInput";
-import MealNotes from "./MealNotes";
 import { weekdayMealPlan } from "../utils/mealPlanProps";
+// import {
+//   handleWeekdayInputChange,
+//   handleWeekendInputChange,
+// } from "../utils/HandleChangeInputs";
 
 function MealPlanForm() {
   // Obtain current date and convert to date that Mantine can parse
@@ -15,8 +18,8 @@ function MealPlanForm() {
   // Obtain userData from localStorage
   const currentUser = localStorage.getItem("username");
   // states to control calendar data
-  const [value1, setValue1] = useState<string | null>(null);
-  const [value2, setValue2] = useState<string | null>(null);
+  const [startDate, setStartDate] = useState<string | null>(null);
+  const [endDate, setEndDate] = useState<string | null>(null);
 
   // state that handles weekday meal data and iterated to render inputs
   // provides value on inputs depending on their name attribute
@@ -34,35 +37,92 @@ function MealPlanForm() {
     fridayDinnerNotes: "",
   });
 
-  const [mealWeekend, setMealWeekend] = useState([
-    {
-      labelLunch: "Saturday Lunch",
-      nameLunch: "saturdayLunch",
-      notesNameLunch: "saturdayLunchNotes",
-      labelDinner: "Saturday Dinner",
-      nameDinner: "saturdayDinner",
-      notesNameDinner: "saturdayDinnerNotes",
-      value: "",
-    },
-    {
-      labelLunch: "Sunday Lunch",
-      nameLunch: "sundayLunch",
-      notesNameLunch: "sundayLunchNotes",
-      labelDinner: "Sunday Dinner",
-      nameDinner: "sundayDinner",
-      notesNameDinner: "sundayDinnerNotes",
-      value: "",
-    },
-  ]);
+  const [weekendMealPlanState, setWeekendMealPlanState] = useState({
+    saturdayLunch: "",
+    saturdayLunchNotes: "",
+    saturdayDinner: "",
+    saturdayDinnerNotes: "",
+    sundayLunch: "",
+    sundayLunchNotes: "",
+    sundayDinner: "",
+    sundayDinnerNotes: "",
+  });
 
+  const [mealPlanDate, setMealPlanDate] = useState({
+    startDate: "",
+    endDate: "",
+  });
+
+  //templateParams used to send data from forms to email service
+  const templateParams = {
+    mondayDinner: weekdayMealPlanState.mondayDinner,
+    mondayDinnerNotes: weekdayMealPlanState.mondayDinnerNotes,
+    tuesdayDinner: weekdayMealPlanState.tuesdayDinner,
+    tuesdayDinnerNotes: weekdayMealPlanState.tuesdayDinnerNotes,
+    wednesdayDinner: weekdayMealPlanState.wednesdayDinner,
+    wednesdayDinnerNotes: weekdayMealPlanState.wednesdayDinnerNotes,
+    thursdayDinner: weekdayMealPlanState.thursdayDinner,
+    thursdayDinnerNotes: weekdayMealPlanState.thursdayDinnerNotes,
+    fridayDinner: weekdayMealPlanState.fridayDinner,
+    fridayDinnerNotes: weekdayMealPlanState.fridayDinnerNotes,
+    saturdayLunch: weekendMealPlanState.saturdayLunch,
+    saturdayLunchNotes: weekendMealPlanState.saturdayLunchNotes,
+    saturdayDinner: weekendMealPlanState.saturdayDinner,
+    saturdayDinnerNotes: weekendMealPlanState.saturdayDinnerNotes,
+    sundayLunch: weekendMealPlanState.sundayLunch,
+    sundayLunchNotes: weekendMealPlanState.sundayLunchNotes,
+    sundayDinner: weekendMealPlanState.sundayDinner,
+    sundayDinnerNotes: weekendMealPlanState.sundayDinnerNotes,
+    startDate: startDate,
+    endDate: endDate,
+    email: {
+      lester: import.meta.env.VITE_LESTER_EMAIL,
+      cath: import.meta.env.VITE_CATH_EMAIL,
+    },
+    emailFrom: localStorage.getItem("userEmail"),
+    name: localStorage.getItem("username"),
+  };
+
+  // handles input changes for text and text area inputs (weekdays)
   const handleWeekdayInputChange = (
     e:
-      | React.ChangeEventHandler<HTMLInputElement, HTMLInputElement>
-      | React.ChangeEventHandler<HTMLTextAreaElement, HTMLTextAreaElement>,
+      | React.ChangeEvent<HTMLInputElement, HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement, HTMLTextAreaElement>,
   ) => {
     setWeekdayMealPlanState((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
+  };
+
+  const handleWeekendInputChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement, HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement, HTMLTextAreaElement>,
+  ) => {
+    setWeekendMealPlanState((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleClick = async (e) => {
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
+        { templateParams },
+        {
+          publicKey: import.meta.env.VITE_PUBLIC_KEY,
+        },
+      );
+      console.log("SUCCESS!");
+      console.log(templateParams);
+    } catch (err) {
+      if (err instanceof EmailJSResponseStatus) {
+        console.log("EMAILJS FAILED...", err);
+        return;
+      }
+      console.log("ERROR", err);
+    }
   };
 
   return (
@@ -83,47 +143,55 @@ function MealPlanForm() {
         </aside>
         <aside className='bg-gray-200 p-1 rounded-t-sm flex justify-center gap-2'>
           <DateInput
-            value={value1}
-            onChange={setValue1}
+            value={startDate}
+            onChange={setStartDate}
             label='Meal plan start date'
             placeholder='meal plan start date'
             name='startDate'
             minDate={convertedDate}
-            // required
+            // onChange={handleDateChange}
           />
           <DateInput
-            value={value2}
-            onChange={setValue2}
+            value={endDate}
+            onChange={setEndDate}
             label='Meal plan end date'
             placeholder='meal plan end date'
             name='endDate'
             minDate={convertedDate}
-            // required
+            // onChange={handleDateChange}
           />
         </aside>
+        {/* <p>{mealPlanDate.startDate}</p> */}
+        {/** Iterate the meal plan props to render necessary input elements */}
         {weekdayMealPlan.map((allMealPlan, key) => (
           <section key={key}>
-            <MealInput
-              sizeProp='xs'
-              labelProp={allMealPlan?.label}
-              placeholderProp="What's for dinner"
-              nameProp={allMealPlan?.name}
-              requiredProp={true}
-              bgColor={allMealPlan.color}
-              handleChange={handleWeekdayInputChange}
-            />
-
-            <MealNotes
-              TASizeProp='sm'
-              TALabelProp='Notes about meal'
-              TAPlaceholderProp='Anything you want to note about the meal?'
-              TANameProp={allMealPlan.notesName}
-              TARequiredProp={false}
-              bgColor={allMealPlan.color}
-              handleChange={handleWeekdayInputChange}
-            />
+            <aside
+              className={`flex flex-col gap-2 ${allMealPlan.color} p-1 pb-2 rounded-t-sm`}
+            >
+              <TextInput
+                size='xs'
+                label={allMealPlan.label}
+                // description='Enter planned meal for Dinner'
+                placeholder="What's for dinner"
+                name={allMealPlan.name}
+                required
+                onChange={handleWeekdayInputChange}
+              />
+            </aside>
+            <aside className={`${allMealPlan.color} rounded-b-sm p-1 pb-2`}>
+              <Textarea
+                size='sm'
+                label={allMealPlan.label}
+                placeholder='Anything you want to note about the meal?'
+                name={allMealPlan.notesName}
+                required
+                onChange={handleWeekdayInputChange}
+              />
+            </aside>
+            {/* <p>{weekdayMealPlanState.mondayDinner}</p> */}
           </section>
         ))}
+        {/** weekend inputs */}
         <aside className='flex gap-2 grid grid-cols-1 grid-rows-2 bg-red-200 p-1 pb-2'>
           <TextInput
             size='xs'
@@ -132,28 +200,29 @@ function MealPlanForm() {
             placeholder="What's up for Lunch?"
             name='saturdayLunch'
             required
+            onChange={handleWeekendInputChange}
           />
           <Textarea
             size='xs'
             label='Notes about meal'
-            // description='Any notes you want to share?'
             placeholder='Anything you want to note about the meal?'
             name='saturdayLunchNotes'
+            onChange={handleWeekendInputChange}
           />
           <TextInput
             size='xs'
             label='Saturday Meal (Dinner)'
-            // description='Enter planned meal for Dinner'
             placeholder="What's for dinner?"
             name='saturdayDinner'
             required
+            onChange={handleWeekendInputChange}
           />
           <Textarea
             size='xs'
             label='Notes about meal'
-            // description='Any notes you want to share?'
             placeholder='Anything you want to note about the meal?'
             name='saturdayDinnerNotes'
+            onChange={handleWeekendInputChange}
           />
         </aside>
         <aside className='flex gap-2 grid grid-cols-1 grid-rows-2 bg-blue-200 p-1 pb-2 rounded-b-sm'>
@@ -164,38 +233,41 @@ function MealPlanForm() {
             placeholder="What's up for Lunch?"
             name='sundayLunch'
             required
+            onChange={handleWeekendInputChange}
           />
           <Textarea
             size='xs'
             label='Notes about meal'
-            // description='Any notes you want to share?'
             placeholder='Anything you want to note about the meal?'
             name='sundayLunchNotes'
+            onChange={handleWeekendInputChange}
           />
           <TextInput
             size='xs'
             label='Sunday Meal (Dinner)'
-            // description='Enter planned meal for Dinner'
             placeholder="What's for dinner?"
             name='sundayDinner'
             required
+            onChange={handleWeekendInputChange}
           />
           <Textarea
             size='xs'
             label='Notes about meal'
-            // description='Any notes you want to share?'
             placeholder='Anything you want to note about the meal?'
             name='sundayDinnerNotes'
+            onChange={handleWeekendInputChange}
           />
         </aside>
-        {/* <TextInput
-          type='text'
-          name='testInput'
-          id=''
-          onChange={handleChangeTest}
-          value={testState.testInput}
-        />
-        <p>{testState.testInput}</p> */}
+        <section className='flex justify-center p-4'>
+          <Button
+            variant='filled'
+            type='button'
+            className=''
+            onClick={handleClick}
+          >
+            Send meal plan
+          </Button>
+        </section>
       </section>
     </>
   );

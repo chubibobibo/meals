@@ -9,6 +9,10 @@ import { NotFoundPageError, ErrorPage } from "./utils";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 
+// if (result.error) {
+//   throw result.error;
+// }
+
 const router = createRouter({
   routeTree,
   defaultNotFoundComponent: NotFoundPageError,
