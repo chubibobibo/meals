@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 
 function LandingPage() {
   // fetch localStorage content to be used as default for the userData state. This way we will have the userData state persist even after refreshes.
+
   const currentUsername = localStorage.getItem("username");
   const currentUserEmail = localStorage.getItem("userEmail");
   const [userData, setUserData] = useState({
@@ -41,7 +42,7 @@ function LandingPage() {
             avatarEmail={import.meta.env.VITE_CATH_EMAIL}
             imgLink={"../src/assets/aru.png"}
             user={userData}
-            setUser={setUserData}
+            setUserData={setUserData}
           />
 
           <AvatarComponent
@@ -49,7 +50,7 @@ function LandingPage() {
             avatarEmail={import.meta.env.VITE_LESTER_EMAIL}
             imgLink={"../src/assets/lester.png"}
             user={userData}
-            setUser={setUserData}
+            setUserData={setUserData}
           />
 
           {/* avatar login links */}

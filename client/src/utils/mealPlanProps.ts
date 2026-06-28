@@ -7,6 +7,7 @@ export const weekdayMealPlan = [
     notesName: "mondayDinnerNotes",
     notesValue: "",
     color: "bg-blue-200",
+    notesLabel: "Monday Dinner Notes",
   },
   {
     label: "Tuesday Dinner",
@@ -14,6 +15,7 @@ export const weekdayMealPlan = [
     notesName: "tuesdayDinnerNotes",
     notesValue: "",
     color: "bg-red-200",
+    notesLabel: "Tuesday Dinner Notes",
   },
   {
     label: "Wednesday Dinner",
@@ -21,13 +23,15 @@ export const weekdayMealPlan = [
     notesName: "wednesdayDinnerNotes",
     notesValue: "",
     color: "bg-blue-200",
+    notesLabel: "Wednesday Dinner Notes",
   },
   {
-    label: "ThursdayDinnerh",
+    label: "ThursdayDinner",
     name: "thursdayDinner",
     notesName: "thursdayDinnerNotes",
     notesValue: "",
     color: "bg-red-200",
+    notesLabel: "Thursday Dinner Notes",
   },
   {
     label: "Friday Dinner",
@@ -35,5 +39,6 @@ export const weekdayMealPlan = [
     notesName: "fridayDinnerNotes",
     notesValue: "",
     color: "bg-blue-200",
+    notesLabel: "Friday Dinner Notes",
   },
 ];
