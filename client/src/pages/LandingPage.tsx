@@ -1,18 +1,24 @@
 import AvatarComponent from "../components/Avatar";
 import { useState } from "react";
+import Footer from "../components/Footer";
 
 function LandingPage() {
   // fetch localStorage content to be used as default for the userData state. This way we will have the userData state persist even after refreshes.
   const currentUsername = localStorage.getItem("username");
+  const currentUserEmail = localStorage.getItem("userEmail");
   const [userData, setUserData] = useState({
     username: currentUsername || null,
+    userEmail: currentUserEmail || null,
   });
   //stores state in local storage
   localStorage.setItem(
     "username",
     userData.username ? userData.username : "No User Selected",
   );
-
+  localStorage.setItem(
+    "userEmail",
+    userData.userEmail ? userData.userEmail : "No user email provided",
+  );
   return (
     <>
       <main className='w-screen h-screen'>
@@ -32,6 +38,7 @@ function LandingPage() {
         <section className='relative flex justify-center items-center gap-10'>
           <AvatarComponent
             avatarName={"Catherine"}
+            avatarEmail={import.meta.env.VITE_CATH_EMAIL}
             imgLink={"../src/assets/aru.png"}
             user={userData}
             setUser={setUserData}
@@ -39,6 +46,7 @@ function LandingPage() {
 
           <AvatarComponent
             avatarName={"Alistair"}
+            avatarEmail={import.meta.env.VITE_LESTER_EMAIL}
             imgLink={"../src/assets/lester.png"}
             user={userData}
             setUser={setUserData}
@@ -46,7 +54,9 @@ function LandingPage() {
 
           {/* avatar login links */}
         </section>
-        {/* <p>Username: {currentUsername}</p> */}
+        <section className='mt-10 fixed inset-x-0 bottom-0'>
+          <Footer />
+        </section>
       </main>
     </>
   );

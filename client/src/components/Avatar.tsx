@@ -8,11 +8,13 @@ interface AvatarComponentType {
   imgLink: string;
   user: { username: string | null };
   setUser: Dispatch<SetStateAction<user>>;
+  avatarEmail: string;
 }
 function AvatarComponent({
   avatarName,
   imgLink,
   user,
+  avatarEmail,
   setUser,
 }: AvatarComponentType) {
   /** @handleClick onClick handler to save data in browser and navigate to dashboard page */
@@ -24,11 +26,12 @@ function AvatarComponent({
     setUser((prev: { username: string }) => ({
       ...prev,
       username: avatarName,
+      userEmail: avatarEmail,
     }));
     navigate({ to: "/dashboard/index" });
   };
 
-  console.log(localStorage.getItem("username"));
+  // console.log(localStorage.getItem("username"));
   return (
     <section className='flex flex-col items-center cursor-pointer'>
       <img
