@@ -3,7 +3,7 @@ import MealPlanForm from "../components/MealPlanForm";
 import Footer from "../components/Footer";
 
 // import { useDisclosure } from "@mantine/hooks";
-import { Button } from "@mantine/core";
+
 // import ModalComponent from "../components/ModalComponent";
 
 function IndexPage() {

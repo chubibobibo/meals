@@ -3,7 +3,6 @@ import { TextInput, Textarea, Button } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import dayjs from "dayjs";
 import { useState } from "react";
-import emailjs, { EmailJSResponseStatus } from "@emailjs/browser";
 
 import ModalComponent from "./ModalComponent";
 import { useDisclosure } from "@mantine/hooks";
@@ -35,26 +34,6 @@ function MealPlanForm() {
   };
 
   console.log(mealDataState);
-  // const handleClick = async (e) => {
-  //   try {
-  //     await emailjs.send(
-  //       import.meta.env.VITE_SERVICE_ID,
-  //       import.meta.env.VITE_TEMPLATE_ID,
-  //       { templateParams },
-  //       {
-  //         publicKey: import.meta.env.VITE_PUBLIC_KEY,
-  //       },
-  //     );
-  //     console.log("SUCCESS!");
-  //     console.log(templateParams);
-  //   } catch (err) {
-  //     if (err instanceof EmailJSResponseStatus) {
-  //       console.log("EMAILJS FAILED...", err);
-  //       return;
-  //     }
-  //     console.log("ERROR", err);
-  //   }
-  // };
 
   return (
     <>
@@ -88,7 +67,6 @@ function MealPlanForm() {
               placeholder='meal plan start date'
               name='startDate'
               minDate={convertedDate}
-              // onChange={handleDateChange}
             />
             <DateInput
               value={endDate}
@@ -97,10 +75,9 @@ function MealPlanForm() {
               placeholder='meal plan end date'
               name='endDate'
               minDate={convertedDate}
-              // onChange={handleDateChange}
             />
           </aside>
-          {/* <p>{mealPlanDate.startDate}</p> */}
+
           {/** Iterate the meal plan props to render necessary input elements */}
           {weekdayMealPlan.map((allMealPlan, key) => (
             <section key={key}>
@@ -123,10 +100,8 @@ function MealPlanForm() {
                   label={allMealPlan.notesLabel}
                   placeholder='Anything you want to note about the meal?'
                   name={allMealPlan.notesName}
-                  // onChange={handleWeekdayInputChange}
                 />
               </aside>
-              {/* <p>{weekdayMealPlanState.mondayDinner}</p> */}
             </section>
           ))}
           {/** weekend inputs */}
@@ -138,14 +113,12 @@ function MealPlanForm() {
               placeholder="What's up for Lunch?"
               name='saturdayLunch'
               required
-              // onChange={handleWeekendInputChange}
             />
             <Textarea
               size='xs'
               label='Notes about meal'
               placeholder='Anything you want to note about the meal?'
               name='saturdayLunchNotes'
-              // onChange={handleWeekendInputChange}
             />
             <TextInput
               size='xs'
@@ -153,14 +126,12 @@ function MealPlanForm() {
               placeholder="What's for dinner?"
               name='saturdayDinner'
               required
-              // onChange={handleWeekendInputChange}
             />
             <Textarea
               size='xs'
               label='Notes about meal'
               placeholder='Anything you want to note about the meal?'
               name='saturdayDinnerNotes'
-              // onChange={handleWeekendInputChange}
             />
           </aside>
           <aside className='flex gap-2 grid grid-cols-1 grid-rows-2 bg-blue-200 p-1 pb-2 rounded-b-sm'>
@@ -171,14 +142,12 @@ function MealPlanForm() {
               placeholder="What's up for Lunch?"
               name='sundayLunch'
               required
-              // onChange={handleWeekendInputChange}
             />
             <Textarea
               size='xs'
               label='Notes about meal'
               placeholder='Anything you want to note about the meal?'
               name='sundayLunchNotes'
-              // onChange={handleWeekendInputChange}
             />
             <TextInput
               size='xs'
@@ -186,23 +155,17 @@ function MealPlanForm() {
               placeholder="What's for dinner?"
               name='sundayDinner'
               required
-              // onChange={handleWeekendInputChange}
             />
             <Textarea
               size='xs'
               label='Notes about meal'
               placeholder='Anything you want to note about the meal?'
               name='sundayDinnerNotes'
-              // onChange={handleWeekendInputChange}
             />
           </aside>
           {/** onClick bubbles up from the button */}
           <section className='flex justify-center p-4' onClick={open}>
-            <Button
-              variant='filled'
-              type='submit'
-              // disabled={Object.keys(mealDataState).length === 0}
-            >
+            <Button variant='filled' type='submit'>
               Send meal plan
             </Button>
           </section>
