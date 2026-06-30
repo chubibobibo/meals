@@ -5,6 +5,7 @@ import { routeTree } from "./routes/routes";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 
 import { NotFoundPageError, ErrorPage } from "./utils";
+import { ToastContainer, Zoom } from "react-toastify";
 
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
@@ -25,6 +26,7 @@ function App() {
       <MantineProvider>
         <RouterProvider router={router} />
       </MantineProvider>
+      <ToastContainer position='top-center' transition={Zoom} closeOnClick />
     </>
   );
 }
