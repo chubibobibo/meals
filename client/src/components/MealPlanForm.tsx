@@ -8,8 +8,10 @@ import ModalComponent from "./ModalComponent";
 import { useDisclosure } from "@mantine/hooks";
 
 import { weekdayMealPlan } from "../utils/mealPlanProps";
+import { useNavigate } from "@tanstack/react-router";
 
 function MealPlanForm() {
+  const navigate = useNavigate({ from: "/dashboard/index" });
   // Obtain current date and convert to date that Mantine can parse
   const currentDate = new Date().getTime();
   const convertedDate = dayjs(currentDate).format("YYYY-MM-DD");
@@ -33,7 +35,11 @@ function MealPlanForm() {
     });
   };
 
-  console.log(mealDataState);
+  // console.log(mealDataState);
+
+  const handleClickNav = () => {
+    navigate({ to: "/" });
+  };
 
   return (
     <>
@@ -85,7 +91,7 @@ function MealPlanForm() {
                 className={`flex flex-col gap-2 ${allMealPlan.color} p-1 pb-2 rounded-t-sm`}
               >
                 <TextInput
-                  size='xs'
+                  size='sm'
                   label={allMealPlan.label}
                   // description='Enter planned meal for Dinner'
                   placeholder="What's for dinner"
@@ -107,7 +113,7 @@ function MealPlanForm() {
           {/** weekend inputs */}
           <aside className='flex gap-2 grid grid-cols-1 grid-rows-2 bg-red-200 p-1 pb-2'>
             <TextInput
-              size='xs'
+              size='sm'
               label='Saturday Meal (Lunch)'
               description='Enter planned meal for Lunch'
               placeholder="What's up for Lunch?"
@@ -115,20 +121,20 @@ function MealPlanForm() {
               required
             />
             <Textarea
-              size='xs'
+              size='sm'
               label='Notes about meal'
               placeholder='Anything you want to note about the meal?'
               name='saturdayLunchNotes'
             />
             <TextInput
-              size='xs'
+              size='sm'
               label='Saturday Meal (Dinner)'
               placeholder="What's for dinner?"
               name='saturdayDinner'
               required
             />
             <Textarea
-              size='xs'
+              size='sm'
               label='Notes about meal'
               placeholder='Anything you want to note about the meal?'
               name='saturdayDinnerNotes'
@@ -136,7 +142,7 @@ function MealPlanForm() {
           </aside>
           <aside className='flex gap-2 grid grid-cols-1 grid-rows-2 bg-blue-200 p-1 pb-2 rounded-b-sm'>
             <TextInput
-              size='xs'
+              size='sm'
               label='Sunday Meal (Lunch)'
               description='Enter planned meal for Lunch'
               placeholder="What's up for Lunch?"
@@ -144,29 +150,32 @@ function MealPlanForm() {
               required
             />
             <Textarea
-              size='xs'
+              size='sm'
               label='Notes about meal'
               placeholder='Anything you want to note about the meal?'
               name='sundayLunchNotes'
             />
             <TextInput
-              size='xs'
+              size='sm'
               label='Sunday Meal (Dinner)'
               placeholder="What's for dinner?"
               name='sundayDinner'
               required
             />
             <Textarea
-              size='xs'
+              size='sm'
               label='Notes about meal'
               placeholder='Anything you want to note about the meal?'
               name='sundayDinnerNotes'
             />
           </aside>
           {/** onClick bubbles up from the button */}
-          <section className='flex justify-center p-4' onClick={open}>
+          <section className='flex justify-center p-4 gap-2' onClick={open}>
             <Button variant='filled' type='submit'>
               Send meal plan
+            </Button>
+            <Button variant='filled' type='button' onClick={handleClickNav}>
+              Back
             </Button>
           </section>
         </form>
