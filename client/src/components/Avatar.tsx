@@ -1,21 +1,28 @@
 /**@Note Rendered in LandingPage */
 
-import type { SetStateAction, Dispatch } from "react";
+import type { Dispatch } from "react";
 import { useNavigate } from "@tanstack/react-router";
 
+// used to type check setUser
+interface UserDataType {
+  username: string | null;
+  userEmail: string | null;
+}
+
+/** @SetUserData type follows the form of UserDataType using Dispatch */
 interface AvatarComponentType {
   avatarName: string;
   imgLink: string;
   user: { username: string | null };
-  setUser: Dispatch<SetStateAction<user>>;
+  setUserData: Dispatch<React.SetStateAction<UserDataType>>;
   avatarEmail: string;
 }
+
 function AvatarComponent({
   avatarName,
   imgLink,
-  user,
   avatarEmail,
-  setUser,
+  setUserData,
 }: AvatarComponentType) {
   /** @handleClick onClick handler to save data in browser and navigate to dashboard page */
   /** @img scales and lightens when active */
@@ -23,7 +30,7 @@ function AvatarComponent({
   const navigate = useNavigate({ from: "/" });
 
   const handleClick = () => {
-    setUser((prev: { username: string }) => ({
+    setUserData((prev: { username: string | null }) => ({
       ...prev,
       username: avatarName,
       userEmail: avatarEmail,

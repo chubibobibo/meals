@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 
 function LandingPage() {
   // fetch localStorage content to be used as default for the userData state. This way we will have the userData state persist even after refreshes.
+
   const currentUsername = localStorage.getItem("username");
   const currentUserEmail = localStorage.getItem("userEmail");
   const [userData, setUserData] = useState({
@@ -29,6 +30,7 @@ function LandingPage() {
           className='w-screen h-screen opacity-30 absolute object-cover object-left'
         />
         {/* background image */}
+        <section className='text-xs text-gray-800'>MealPlanner v1.0.0</section>
         <section className='h-20 relative flex justify-center items-center px-5 mx-2 border-2 rounded-2xl mb-50 translate-y-30'>
           <h1 className='font-bold text-base font-Play text-gray-900 text-center '>
             Who is creating the meal plan for the week?
@@ -39,17 +41,17 @@ function LandingPage() {
           <AvatarComponent
             avatarName={"Catherine"}
             avatarEmail={import.meta.env.VITE_CATH_EMAIL}
-            imgLink={"../src/assets/aru.png"}
+            imgLink={"../src/assets/aru2.png"}
             user={userData}
-            setUser={setUserData}
+            setUserData={setUserData}
           />
 
           <AvatarComponent
             avatarName={"Alistair"}
             avatarEmail={import.meta.env.VITE_LESTER_EMAIL}
-            imgLink={"../src/assets/lester.png"}
+            imgLink={"../src/assets/lester2.png"}
             user={userData}
-            setUser={setUserData}
+            setUserData={setUserData}
           />
 
           {/* avatar login links */}
